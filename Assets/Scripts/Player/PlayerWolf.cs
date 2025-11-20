@@ -27,10 +27,10 @@ public class PlayerWolf : MonoBehaviour
     private Animator animator;
 
     [Header("Настройки анимации")]
- //   [SerializeField] private string animationTriggerName = "Play";
     [SerializeField] private AnimationClip barkClip;
     [SerializeField] private AnimationClip happyClip;
 
+    [SerializeField] private Animation anim;
 
     void Awake()
     {
@@ -87,25 +87,18 @@ public class PlayerWolf : MonoBehaviour
 
     void PlayAnim(AnimationClip clip)
     {
-        animator.CrossFade(clip.name, 2.0f);
+        anim[clip.name].speed = 1.0f;
+        anim.Play(clip.name);
     }
-
-//    void PlayAnim(ANIM_STATE state)
-   // {
-      //  if (animator != null && !string.IsNullOrEmpty(animationTriggerName))
-      //  {
-     //       animator.SetTrigger(animationTriggerName);
-    //    }
-     //   else
-     //   {
-      //      Debug.LogWarning("Animator не найден или не задано имя триггера!");
-     //   }
-   // }
 
     void Destroy()
     {
-        _net.Selected += PlayPaddockOpenSound;
-        _net.AnimalsMoving += PlayAnimalsRunSound;
-        _net.BadTry += BadClickSound;
+        _net.Selected -= PlayPaddockOpenSound;
+        _net.Selected -= PlayBarkAnim;
+        _net.AnimalsMoving -= PlayAnimalsRunSound;
+        _net.AnimalsMoving -= PlayBarkAnim;
+        _net.BadTry -= BadClickSound;
+        _net.BadTry -= PlayBarkAnim;
+
     }
 }
