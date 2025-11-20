@@ -3,6 +3,11 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 .utmp/
+[Aa]ssets/TextMesh/
+[Aa]ssets/Animations/
+[Aa]ssets/Packs/
+![Aa]ssets/Scripts/*.cs
+![Aa]ssets/Scripts/*.meta
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
